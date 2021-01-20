@@ -11,8 +11,9 @@ type Props = {
 const CountryEntry: React.FC<Props> = (props) => {
     const { country } = props;
     let btnClassName = 'btn btn-primary';
+    let btnInnerText = 'Select';
 
-    const [updatedText, setText] = useState(props.country.currentText);
+    const [updatedText, setText] = useState(btnInnerText);
     const [updatedClassName, setClassName] = useState(btnClassName);
     function OnClickActionButton() {
         setText((updatedText === 'Select' ? 'Unselect' : 'Select'));
