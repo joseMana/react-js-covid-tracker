@@ -16,16 +16,18 @@ const CountryEntry: React.FC<Props> = (props) => {
 
     const [updatedText, setText] = useState(props.country.currentText);
     const [updatedClassName, setClassName] = useState(btnClassName);
-    function OnClickSetText() {
-        setText((updatedText === 'Select' ? 'Unselect' : 'Select'));
+    function OnClickActionButton() {
 
-        btnClassName = (updatedText === 'Select' ? 'btn btn-danger' : 'btn btn-primary');
-        setClassName(btnClassName);
+        var newText = (updatedText === 'Select' ? 'Unselect' : 'Select');
+        var newClassName = (updatedText === 'Select' ? 'btn btn-danger' : 'btn btn-primary')
+
+        setText(newText);
+        setClassName(newClassName);
     }
 
     return <TableRow key={country.countryCode}>
         <TableCell align="center">
-            <button className={updatedClassName} onClick={OnClickSetText}>
+            <button className={updatedClassName} onClick={OnClickActionButton}>
                 {updatedText}
             </button>
         </TableCell>
