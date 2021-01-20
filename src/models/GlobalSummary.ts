@@ -13,7 +13,6 @@ export default class GlobalSummary {
         this.totalDeaths = global.TotalDeaths;
         this.newRecovered = global.NewRecovered;
         this.totalRecovered = global.TotalRecovered;
-
     }
 
 }

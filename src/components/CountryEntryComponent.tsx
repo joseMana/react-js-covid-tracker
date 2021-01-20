@@ -8,8 +8,6 @@ type Props = {
     country: Country,
 }
 
-
-
 const CountryEntry: React.FC<Props> = (props) => {
     const { country } = props;
     let btnClassName = 'btn btn-primary';
@@ -17,12 +15,9 @@ const CountryEntry: React.FC<Props> = (props) => {
     const [updatedText, setText] = useState(props.country.currentText);
     const [updatedClassName, setClassName] = useState(btnClassName);
     function OnClickActionButton() {
-
-        var newText = (updatedText === 'Select' ? 'Unselect' : 'Select');
-        var newClassName = (updatedText === 'Select' ? 'btn btn-danger' : 'btn btn-primary')
-
-        setText(newText);
-        setClassName(newClassName);
+        setText((updatedText === 'Select' ? 'Unselect' : 'Select'));
+        setClassName((updatedText === 'Select' ? 'btn btn-danger' : 'btn btn-primary'));
+        console.log(props.country.countryCode);
     }
 
     return <TableRow key={country.countryCode}>

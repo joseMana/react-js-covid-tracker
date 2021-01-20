@@ -7,7 +7,7 @@ const Navbar = () => {
                 <h1>
                     Covid Tracker
                 </h1>
-                <ul>                
+                <ul>
                 </ul>
             </nav>
         </div>
