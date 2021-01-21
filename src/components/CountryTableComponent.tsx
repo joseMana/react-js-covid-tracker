@@ -6,6 +6,7 @@ import CountryEntry from './CountryEntryComponent';
 type Props = {
     countries: Country[];
     onCountrySelect: (id: Country) => void;
+    onCountryUnSelect: (id: Country) => void;
 }
 
 const useStyles = makeStyles({
@@ -36,7 +37,8 @@ const CountryTable: React.FC<Props> = (props) => {
                         return <CountryEntry 
                                     country={country}
                                     key={country.countryCode} 
-                                    onCountrySelect={props.onCountrySelect}/>
+                                    onCountrySelect={props.onCountrySelect}
+                                    onCountryUnSelect={props.onCountryUnSelect}/>
                     })}
                 </TableBody>
             </Table>

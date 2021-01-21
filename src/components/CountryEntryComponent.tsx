@@ -6,6 +6,7 @@ import { updateCommaList } from "typescript";
 type Props = {
     country: Country,
     onCountrySelect: (id: Country) => void;
+    onCountryUnSelect: (id: Country) => void;
 }
 
 const CountryEntry: React.FC<Props> = (props) => {
@@ -23,7 +24,7 @@ const CountryEntry: React.FC<Props> = (props) => {
             props.onCountrySelect(props.country);
          }
          else {
-            //  removeCountry(props.country.countryCode);
+            props.onCountryUnSelect(props.country);
          }
     }
 
