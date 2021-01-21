@@ -9,11 +9,6 @@ import Country from '../models/Country';
 let selectedCountries: Country[] = [];
 
 function Dashboard() {
-  const [summary, setSummary] = useState<CovidSummary | null>(null);
-  useEffect(() => {
-    GetInfo();
-  });
-
   const [newSelectedCountryList, setNewSelectedCountryList] = useState<Country[]>(selectedCountries);
   function OnCountrySelect(country: Country) {
     GetInfo();
@@ -25,12 +20,18 @@ function Dashboard() {
 
   function OnCountryUnSelect(country: Country) {
     GetInfo();
-    
-      const countryIndex = selectedCountries.findIndex((r: Country) => r.countryCode === country.countryCode);
-      selectedCountries.splice(countryIndex, 1);
-      setNewSelectedCountryList(selectedCountries);
+
+    const countryIndex = selectedCountries.findIndex((r: Country) => r.countryCode === country.countryCode);
+    selectedCountries.splice(countryIndex, 1);
+    setNewSelectedCountryList(selectedCountries);
   }
-  function GetInfo(){
+
+  const [summary, setSummary] = useState<CovidSummary | null>(null);
+  useEffect(() => {
+    GetInfo();
+  }, [newSelectedCountryList]);
+
+  function GetInfo() {
     async function getInfo() {
       const summary = await getSummaryPerCountry();
       return summary;
@@ -53,9 +54,9 @@ function Dashboard() {
               <Grid>
                 <CountryTable
                   countries={summary.countries}
-                  onCountrySelect={OnCountrySelect} 
+                  onCountrySelect={OnCountrySelect}
                   onCountryUnSelect={OnCountryUnSelect}
-                  />
+                />
               </Grid>
             </Grid>
           </div>
