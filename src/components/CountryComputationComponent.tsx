@@ -1,10 +1,20 @@
 import React, { useState } from "react";
+import { getParsedCommandLineOfConfigFile } from "typescript";
 import Country from "../models/Country";
 
 type Props = {
     countries: Country[];
 };
-
+const inLineStyle = {
+    divStyle: {
+        display: 'inline-flex'
+    }
+}
+let selectedCountryIndex: number = 0;
+const GetComma = () => {
+    selectedCountryIndex++;
+    return (selectedCountryIndex === 1) ? "" : ",";
+}
 const CountryComputation = (props: Props) => {
     let TotalConfirmed: number = 0;
     let TotalConfirmed_Average: number = 0;
@@ -19,17 +29,18 @@ const CountryComputation = (props: Props) => {
     });
 
     function GetAverageCase(totalNumber: number) {
-        if(isNaN(totalNumber/props.countries.length))
+        if (isNaN(totalNumber / props.countries.length))
             return 0;
-        else if(totalNumber / props.countries.length === totalNumber)
+        else if (totalNumber / props.countries.length === totalNumber)
             return parseInt(totalNumber.toFixed());
         else
-            return parseInt((totalNumber / props.countries.length).toFixed()); ;
+            return parseInt((totalNumber / props.countries.length).toFixed());;
     }
     TotalConfirmed_Average = GetAverageCase(TotalConfirmed);
     TotalDeaths_Average = GetAverageCase(TotalDeaths);
     TotalRecovered_Average = GetAverageCase(TotalRecovered);
-
+    
+    selectedCountryIndex = 0;
     return (
         <div className="counter-top bg-primary p-2 text-center">
             <h1>Total Confirmed:{TotalConfirmed}</h1>
@@ -40,9 +51,11 @@ const CountryComputation = (props: Props) => {
             <p>Average:{TotalRecovered_Average}</p>
             <br></br>
             <h2>Selected Countries:</h2>
+            <div style={inLineStyle.divStyle}>
             {props.countries.map((country: Country) => {
-                return <p>{country.name}</p>
+                return <p>{GetComma()}{country.name}</p>
             })}
+            </div>
         </div>
     );
 }
