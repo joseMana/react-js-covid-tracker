@@ -5,21 +5,31 @@ import { getSummaryPerCountry } from '../services/covidService';
 import { Grid } from '@material-ui/core';
 import CountryComputation from '../components/CountryComputationComponent';
 
+import Country from '../models/Country';
+
+let selectedCountries: Country[] = [];
 function Dashboard() {
   const [summary, setSummary] = useState<CovidSummary | null>(null);
-
   useEffect(() => {
     async function getInfo() {
       const summary = await getSummaryPerCountry();
+      console.log(summary);
       return summary;
     }
-
     getInfo().then((info) => {
       console.log(info);
       setSummary(info);
     })
 
   }, []);
+
+  const [newSelectedCountryList, setNewSelectedCountryList] = useState<Country[]>(selectedCountries);
+  function OnCountrySelect(country: Country){
+    selectedCountries.push(country);
+    setNewSelectedCountryList(selectedCountries)
+
+    console.log(newSelectedCountryList);
+  }
 
   if (summary) {
     return (
@@ -33,7 +43,8 @@ function Dashboard() {
             <Grid container spacing={1}>
               <Grid>
                 <CountryTable
-                  countries={summary.countries} />
+                  countries={summary.countries} 
+                  onCountrySelect={OnCountrySelect}/>
               </Grid>
             </Grid>
           </div>

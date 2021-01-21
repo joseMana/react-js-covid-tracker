@@ -3,9 +3,11 @@ import { TableRow, TableCell } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { updateCommaList } from "typescript";
 import { red } from "@material-ui/core/colors";
+import useReview from "../hooks/myHook";
 
 type Props = {
     country: Country,
+    onCountrySelect: any
 }
 
 const CountryEntry: React.FC<Props> = (props) => {
@@ -13,12 +15,20 @@ const CountryEntry: React.FC<Props> = (props) => {
     let btnClassName = 'btn btn-primary';
     let btnInnerText = 'Select';
 
+    const { newSelectedCountryList, avgRating, addCountry, removeCountry } = useReview();
+
     const [updatedText, setText] = useState(btnInnerText);
     const [updatedClassName, setClassName] = useState(btnClassName);
     function OnClickActionButton() {
         setText((updatedText === 'Select' ? 'Unselect' : 'Select'));
         setClassName((updatedText === 'Select' ? 'btn btn-danger' : 'btn btn-primary'));
-        console.log(props.country.countryCode);
+
+         if(updatedText === 'Select') {
+             addCountry(props.country);
+         }
+         else {
+             removeCountry(props.country.countryCode);
+         }
     }
 
     return <TableRow key={country.countryCode}>
