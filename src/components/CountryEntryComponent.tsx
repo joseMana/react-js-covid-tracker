@@ -2,20 +2,16 @@ import Country from "../models/Country"
 import { TableRow, TableCell } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { updateCommaList } from "typescript";
-import { red } from "@material-ui/core/colors";
-import useReview from "../hooks/myHook";
 
 type Props = {
     country: Country,
-    onCountrySelect: any
+    onCountrySelect: (id: Country) => void;
 }
 
 const CountryEntry: React.FC<Props> = (props) => {
     const { country } = props;
     let btnClassName = 'btn btn-primary';
     let btnInnerText = 'Select';
-
-    const { newSelectedCountryList, avgRating, addCountry, removeCountry } = useReview();
 
     const [updatedText, setText] = useState(btnInnerText);
     const [updatedClassName, setClassName] = useState(btnClassName);
@@ -24,10 +20,10 @@ const CountryEntry: React.FC<Props> = (props) => {
         setClassName((updatedText === 'Select' ? 'btn btn-danger' : 'btn btn-primary'));
 
          if(updatedText === 'Select') {
-             addCountry(props.country);
+            props.onCountrySelect(props.country);
          }
          else {
-             removeCountry(props.country.countryCode);
+            //  removeCountry(props.country.countryCode);
          }
     }
 

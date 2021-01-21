@@ -5,7 +5,7 @@ import CountryEntry from './CountryEntryComponent';
 
 type Props = {
     countries: Country[];
-    onCountrySelect: any;
+    onCountrySelect: (id: Country) => void;
 }
 
 const useStyles = makeStyles({
@@ -16,7 +16,7 @@ const useStyles = makeStyles({
 
 const CountryTable: React.FC<Props> = (props) => {
     const classes = useStyles();
-
+    
     return <Paper>
             <Table className={classes.table} aria-label="simple table">
                 <TableHead>

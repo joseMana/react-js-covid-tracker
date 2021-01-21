@@ -5,7 +5,7 @@ export default class Country {
     countryCode: string;
     slug: string;
     stats: CountryStats;
-    onCountrySelect: any;
+    onCountrySelect: (id: Country) => void;
 
     constructor(countryResponse: any) {
         this.name = countryResponse.Country;

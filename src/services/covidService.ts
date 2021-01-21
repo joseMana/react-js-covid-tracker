@@ -8,7 +8,7 @@ export const getSummaryPerCountry = async () : Promise<CovidSummary | null> => {
             setTimeout(() => {
                 const covidSummary = new CovidSummary(data);
                 resolve(covidSummary);
-            }, 2000);
+            }, 350);
             
         }
         else {
