@@ -1,3 +1,4 @@
+import { parse } from "path";
 import React, { useState } from "react";
 import Country from "../models/Country";
 
@@ -7,21 +8,31 @@ type Props = {
 
 const CountryComputation = (props: Props) => {
     let TotalConfirmed: number = 0;
-    let TotalConfirmed_Average: number =  0.0;
+    let TotalConfirmed_Average: number = 0;
     let TotalDeaths: number = 0;
-    let TotalDeaths_Average: number = 0.0;
+    let TotalDeaths_Average: number = 0;
     let TotalRecovered: number = 0;
-    let TotalRecovered_Average: number =  0.0;
-
+    let TotalRecovered_Average: number = 0;
     props.countries.forEach(country => {
         TotalConfirmed += country.stats.totalConfirmed + country.stats.newConfirmed;
         TotalDeaths += country.stats.totalDeaths + country.stats.newDeaths;
         TotalRecovered += country.stats.totalRecovered + country.stats.newRecovered
     });
 
-    TotalConfirmed_Average = (TotalConfirmed / props.countries.length >= TotalConfirmed) ? 0 : TotalConfirmed/props.countries.length;
-    TotalDeaths_Average = (TotalDeaths / props.countries.length >= TotalDeaths) ? 0 : TotalDeaths/props.countries.length;
-    TotalRecovered_Average = (TotalRecovered / props.countries.length >= TotalRecovered) ? 0 : TotalRecovered/props.countries.length;
+    function GetAverageCase(totalNumber: number) {
+        if(isNaN(totalNumber/props.countries.length)){
+            return 0;
+        }
+        else if(totalNumber / props.countries.length === totalNumber){
+            return parseInt(totalNumber.toFixed());
+        }
+        else{
+            return parseInt((totalNumber / props.countries.length).toFixed()); ;
+        }
+    }
+    TotalConfirmed_Average = GetAverageCase(TotalConfirmed);
+    TotalDeaths_Average = GetAverageCase(TotalDeaths);
+    TotalRecovered_Average = GetAverageCase(TotalRecovered);
 
     return (
         <div className="counter-top bg-primary p-2 text-center">
