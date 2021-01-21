@@ -20,15 +20,12 @@ const CountryComputation = (props: Props) => {
     });
 
     function GetAverageCase(totalNumber: number) {
-        if(isNaN(totalNumber/props.countries.length)){
+        if(isNaN(totalNumber/props.countries.length))
             return 0;
-        }
-        else if(totalNumber / props.countries.length === totalNumber){
+        else if(totalNumber / props.countries.length === totalNumber)
             return parseInt(totalNumber.toFixed());
-        }
-        else{
+        else
             return parseInt((totalNumber / props.countries.length).toFixed()); ;
-        }
     }
     TotalConfirmed_Average = GetAverageCase(TotalConfirmed);
     TotalDeaths_Average = GetAverageCase(TotalDeaths);
