@@ -11,9 +11,9 @@ const inLineStyle = {
     }
 }
 let selectedCountryIndex: number = 0;
-const GetComma = () => {
+const WriteCountryName = (countryName:string) => {
     selectedCountryIndex++;
-    return (selectedCountryIndex === 1) ? "" : ",";
+    return (selectedCountryIndex === 1) ? countryName : `,${countryName}`;
 }
 const CountryComputation = (props: Props) => {
     let TotalConfirmed: number = 0;
@@ -53,7 +53,7 @@ const CountryComputation = (props: Props) => {
             <h2>Selected Countries:</h2>
             <div style={inLineStyle.divStyle}>
             {props.countries.map((country: Country) => {
-                return <p>{GetComma()}{country.name}</p>
+                return <p>{WriteCountryName(country.name)}</p>
             })}
             </div>
         </div>
